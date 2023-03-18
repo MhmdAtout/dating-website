@@ -16,7 +16,8 @@ class UserController extends Controller
     }
 
     function getUser($id){
-        $user = User::find($id);
+        $user = User::with("sent", "received")
+        ->find($id);   
 
         return response()->json([
             "user" => $user
