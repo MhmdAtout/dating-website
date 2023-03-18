@@ -27,6 +27,7 @@ Route::group(["prefix"=>"actions"],function(){
     Route::post("/follow",[ActionsController::class,"follow"]);
     Route::post("/following",[ActionsController::class,"getFollowing"]);
     Route::post("/block",[ActionsController::class,"block"]);
+    Route::post("/blocks",[ActionsController::class,"getBlocks"]);
 });
 
 
