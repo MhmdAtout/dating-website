@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ActionsController;
 
 
 Route::controller(AuthController::class)->group(function () {
@@ -15,6 +16,14 @@ Route::controller(AuthController::class)->group(function () {
 
 });
 
-Route::get("/allUsers",[UserController::class,"getUsers"]);
-Route::get("/{id}",[UserController::class,"getUser"]);
+Route::group(["prefix"=>"user"],function(){
+    Route::get("/allUsers",[UserController::class,"getUsers"]);
+    Route::get("/{id}",[UserController::class,"getUser"]);
+});
+
+Route::group(["prefix"=>"actions"],function(){
+    Route::post("/sendMesaage",[ActionsController::class,"sendMessage"]);
+});
+
+
 ?>
