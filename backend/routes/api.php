@@ -7,28 +7,29 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActionsController;
 
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
-    Route::get('me', 'me');
-
+Route::group(["prefix"=>"auth"],function(){
+    Route::controller(AuthController::class)->group(function () {
+        Route::post('login', 'login');
+        Route::post('register', 'register');
+    });
 });
 
 Route::group(["prefix"=>"user"],function(){
-    Route::get("/allUsers",[UserController::class,"getUsers"]);
-    Route::get("/{id}",[UserController::class,"getUser"]);
+    Route::controller(UserController::class)->group(function () {
+        Route::get("/allUsers", "getUsers");
+        Route::get("/{id}","getUser");
+    });
 });
 
 Route::group(["prefix"=>"actions"],function(){
-    Route::post("/sendMesaage",[ActionsController::class,"sendMessage"]);
-    Route::post("/getMesaage",[ActionsController::class,"getMessage"]);
-    Route::post("/follow",[ActionsController::class,"follow"]);
-    Route::post("/following",[ActionsController::class,"getFollowing"]);
-    Route::post("/block",[ActionsController::class,"block"]);
-    Route::post("/blocks",[ActionsController::class,"getBlocks"]);
+    Route::controller(ActionsController::class)->group(function () {
+        Route::post("/sendMesaage", "sendMessage");
+        Route::post("/getMesaage", "getMessage");
+        Route::post("/follow", "follow");
+        Route::post("/following", "getFollowing");
+        Route::post("/block", "block");
+        Route::post("/blocks", "getBlocks");
+    });
 });
-
 
 ?>
