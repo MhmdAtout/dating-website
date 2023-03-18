@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\Follower;
+use App\Models\Block;
 
 class ActionsController extends Controller
 {
@@ -92,6 +93,10 @@ class ActionsController extends Controller
                 "blocker_id" => $request->blocker_id,
                 "blocked_id" => $request->blocked_id,
             ]);
+
+            $remove_follow = Follower::where("follower_id", $request->blocker_id)
+                                    ->where("followed_id", $request->blocked_id)
+                                    ->delete();
     
             return response()->json([
                 "message" => $block,
