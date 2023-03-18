@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Block;
+use App\Models\Follower;
 
 class UserController extends Controller
 {
@@ -21,6 +23,20 @@ class UserController extends Controller
 
         return response()->json([
             "user" => $user
+        ]);
+    }
+
+    function notification($id){
+        $follow = Follower::where("followed_id", $id)
+                            ->with("follower")
+                            ->get();
+        $block = Block::where("blocked_id", $id)
+                            ->with("blocker")
+                            ->get();
+        
+        return response()->json([
+            "follows" => $follow,
+            "blocks" => $block
         ]);
     }
 }
