@@ -74,4 +74,29 @@ class ActionsController extends Controller
             ]);
         }
     }
+
+    function block(Request $request){
+        $block = Block::where("blocker_id", $request->blocker_id)
+                            ->where("blocked_id", $request->blocked_id)
+                            ->get();
+        if($block->count()!=0){
+            $block = Block::where("blocker_id", $request->blocker_id)
+                            ->where("blocked_id", $request->blocked_id)
+                            ->delete();
+
+            return response()->json([
+                "status" => "unblocked"
+            ]);
+        }else{
+            $block = Block::create([
+                "blocker_id" => $request->blocker_id,
+                "blocked_id" => $request->blocked_id,
+            ]);
+    
+            return response()->json([
+                "message" => $block,
+                "status" => "blocked"
+            ]);
+        }
+    }
 }
