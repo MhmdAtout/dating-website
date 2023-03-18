@@ -58,4 +58,19 @@ class ActionsController extends Controller
             ]);
         }
     }
+
+    function getFollowing(Request $request){
+        $following = Follower::where("follower_id", $request->follower_id)
+                                ->get();
+
+        if($following->count()!=0){
+            return response()->json([
+                "response" => $following
+            ]);
+        }else{
+            return response()->json([
+                "response" => "No Following"
+            ]);
+        }
+    }
 }
