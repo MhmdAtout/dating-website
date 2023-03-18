@@ -14,4 +14,12 @@ class UserController extends Controller
             "users" => $users
         ]);
     }
+
+    function getUser($id){
+        $user = User::find($id);
+
+        return response()->json([
+            "user" => $user
+        ]);
+    }
 }
