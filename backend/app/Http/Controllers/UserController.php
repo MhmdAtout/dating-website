@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Block;
 use App\Models\Follower;
+use App\Models\Info;
 
 class UserController extends Controller
 {
@@ -38,5 +39,13 @@ class UserController extends Controller
             "follows" => $follow,
             "blocks" => $block
         ]);
+    }
+
+    function update(Request $request){
+        $user = User::where("id", $request->id)
+                    ->update([
+                        'location' => $request->location,
+                        "bio" => $request->bio
+                    ]);
     }
 }
