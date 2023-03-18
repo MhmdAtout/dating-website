@@ -49,6 +49,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Follower::class, "followed_id");
     }
+    public function blocked(): HasMany
+    {
+        return $this->hasMany(Block::class, "blocked_id");
+    }
 
     /**
      * The attributes that should be cast.
