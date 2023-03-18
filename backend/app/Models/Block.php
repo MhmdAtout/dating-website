@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 class Block extends Model
@@ -13,4 +14,9 @@ class Block extends Model
         "blocker_id",
         "blocked_id"
     ];
+
+    public function blocked(): BelongsTo
+    {
+        return $this->belongsTo(User::class, "blocked_id");
+    }
 }
