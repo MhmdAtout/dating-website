@@ -16,4 +16,5 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::get("/allUsers",[UserController::class,"getUsers"]);
+Route::get("/{id}",[UserController::class,"getUser"]);
 ?>
