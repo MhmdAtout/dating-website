@@ -16,6 +16,6 @@ class Follower extends Model
 
     public function followed(): BelongsTo
     {
-        return $this->belongsTo(User::class, "follower_id");
+        return $this->belongsTo(User::class, "followed_id");
     }
 }
