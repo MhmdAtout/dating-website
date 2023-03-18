@@ -11,7 +11,6 @@ class Info extends Model
     protected $table = "users_info";
 
     protected $fillable = [
-        "user_id",
         "bio",
         "prodile_pic",
         "optional_pic1",
