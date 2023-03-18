@@ -19,6 +19,7 @@ Route::group(["prefix"=>"user"],function(){
         Route::get("/allUsers", "getUsers");
         Route::get("/{id}","getUser");
         Route::get("notification/{id}","notification");
+        Route::post("/update","update");
     });
 });
 
