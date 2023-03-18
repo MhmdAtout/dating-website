@@ -42,10 +42,16 @@ class UserController extends Controller
     }
 
     function update(Request $request){
-        $user = User::where("id", $request->id)
-                    ->update([
-                        'location' => $request->location,
-                        "bio" => $request->bio
-                    ]);
+        $user = User::find($request->id);
+
+        $user->update([
+            'bio' => $request->bio ?? $user->bio,
+            'location' => $request->location ?? $user->location,
+        ]);
+
+        return response()->json([
+            "users" => $user
+        ]);
+
     }
 }
