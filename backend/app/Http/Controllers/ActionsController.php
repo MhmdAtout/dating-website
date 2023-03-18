@@ -104,4 +104,20 @@ class ActionsController extends Controller
             ]);
         }
     }
+
+    function getBlocks(Request $request){
+        $blocks = Block::where("blocker_id", $request->blocker_id)
+                        ->with("blocked")
+                        ->get();
+
+        if($blocks->count()!=0){
+            return response()->json([
+                "response" => $blocks
+            ]);
+        }else{
+            return response()->json([
+                "response" => "No Blocks"
+            ]);
+        }
+    }
 }
