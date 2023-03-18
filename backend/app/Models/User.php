@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -35,6 +36,15 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'remember_token',
     ];
+
+    public function sent(): HasMany
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+    public function received(): HasMany
+    {
+        return $this->hasMany(Message::class, "recepient_id");
+    }
 
     /**
      * The attributes that should be cast.
