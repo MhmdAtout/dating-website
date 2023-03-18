@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('users_info', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('id')->on('users');
-            $table->string('bio');
             $table->string('prodile_pic');
             $table->string('optional_pic1');
             $table->string('optional_pic2');
