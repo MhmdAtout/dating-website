@@ -108,6 +108,7 @@ button {
   font-family: pRegular;
   color: white;
   cursor: pointer;
+  margin: 5px;
 }
 
 /* ankertags */
