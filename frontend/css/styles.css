@@ -178,3 +178,26 @@
   width: 80%;
   height: 80%;
 }
+
+/* profile page */
+.profile {
+  width: 40vw;
+  height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #cfcfcf;
+}
+.profile > * {
+  margin: 10px 0;
+}
+.profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.user-info {
+  width: 40%;
+}
+.user-info > * {
+  margin: 7px 0;
+}
