@@ -133,3 +133,47 @@
   box-shadow: 0 0 5px #cfcfcf;
   border-radius: 10px;
 }
+
+.messages {
+  width: 25vw;
+  height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #cfcfcf;
+}
+.message-cards {
+  width: 100%;
+  height: 90%;
+  padding: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.sent-message {
+  max-width: 80%;
+  margin: 5px;
+  align-self: flex-end;
+  padding: 10px;
+  box-shadow: 0 0 5px #cfcfcf;
+  border-radius: 10px;
+  background-color: #0cace3;
+}
+.sent-message > p {
+  color: white;
+}
+.received-message {
+  max-width: 80%;
+  align-self: flex-start;
+  margin: 5px;
+  padding: 10px;
+  box-shadow: 0 0 5px #cfcfcf;
+  border-radius: 10px;
+}
+
+.send-message {
+  height: 8%;
+  width: 100%;
+}
+.send-message > input {
+  width: 80%;
+  height: 80%;
+}
