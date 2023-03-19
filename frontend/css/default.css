@@ -82,6 +82,10 @@ h3 {
 p {
   font-size: 16px;
   color: #333;
+  font-family: pregular;
+}
+.pointer {
+  cursor: pointer;
 }
 
 /* fonts */
@@ -117,7 +121,7 @@ a {
 
 input {
   outline: none;
-  border: 1.5px solid #7cc8e7;
+  border: 1.5px solid #dfdfdf;
   border-radius: 10px;
   padding: 5px 10px;
 }
