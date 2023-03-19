@@ -104,3 +104,23 @@ button {
   font-family: pRegular;
   color: white;
 }
+
+/* ankertags */
+a {
+  text-decoration: none;
+  color: #7cc8e7;
+  font-size: 18px;
+  padding: 3px 30px;
+  border-radius: 10px;
+  font-family: pbold;
+}
+
+input {
+  outline: none;
+  border: 1.5px solid #7cc8e7;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+::placeholder {
+  font-family: pregular;
+}
