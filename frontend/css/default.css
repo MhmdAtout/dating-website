@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: pBold;
+  src: url("../assets/fonts/Poppins/Poppins-Bold.ttf");
+}
+@font-face {
+  font-family: pRegular;
+  src: url("../assets/fonts/Poppins/Poppins-Regular.ttf");
+}
+@font-face {
+  font-family: pLight;
+  src: url("../assets/fonts/Poppins/Poppins-Light.ttf");
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* display */
+.hide {
+  display: none;
+}
+.flex {
+  display: flex;
+}
+
+/* flex direction */
+.column {
+  flex-direction: column;
+}
+
+/* justifty content */
+.jc-center {
+  justify-content: center;
+}
+.jc-start {
+  justify-content: flex-start;
+}
+.jc-end {
+  justify-content: flex-end;
+}
+.jc-sb {
+  justify-content: space-between;
+}
+.jc-sa {
+  justify-content: space-around;
+}
+.jc-se {
+  justify-content: space-evenly;
+}
+
+/* align items */
+.ai-center {
+  align-items: center;
+}
+.ai-start {
+  align-items: flex-start;
+}
+.ai-end {
+  align-items: flex-end;
+}
+
+/* text */
+h1 {
+  font-size: 36px;
+  color: #333;
+  font-family: pBold;
+}
+h3 {
+  font-size: 28px;
+  color: #333;
+  font-family: pBold;
+}
+p {
+  font-size: 16px;
+  color: #333;
+}
+
+/* fonts */
+.bold {
+  font-family: pBold;
+}
+.regular {
+  font-family: pRegular;
+}
+.light {
+  font-family: pLight;
+}
+
+/* button */
+button {
+  background-image: linear-gradient(45deg, #0cace3, #b5d6e9);
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: pRegular;
+  color: white;
+}
