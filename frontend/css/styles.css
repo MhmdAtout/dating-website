@@ -21,27 +21,42 @@
 }
 
 /* signup */
-.signup {
+.auth {
   width: 100vw;
   height: 100vh;
 }
 
-.signup-img {
+.auth-img {
   width: 40%;
   height: 60%;
 }
-.signup-bg {
+.auth-bg {
 }
 
-.signup-content {
+.auth-content {
   width: 60%;
   height: 60%;
 }
-.signup-content-inputs {
+.signin-content {
+  width: 60%;
+  height: 40%;
+}
+.auth-content-inputs {
   height: 60%;
   width: 30%;
 }
-.signup-content-inputs > input {
+.signin-content-inputs {
+  height: 40%;
+  width: 30%;
+}
+.auth-content-inputs > input {
   width: 100%;
   height: 40px;
+}
+.signin-content-inputs > input {
+  width: 100%;
+  height: 40px;
+}
+.frgt-pss {
+  align-self: flex-start;
 }
