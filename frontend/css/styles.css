@@ -112,3 +112,24 @@
   height: 100%;
   text-align: center;
 }
+
+.notifications {
+  width: 25vw;
+  height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #cfcfcf;
+}
+.notification-cards {
+  width: 100%;
+  height: 90%;
+  padding: 10px;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+.notifocation-card {
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 0 5px #cfcfcf;
+  border-radius: 10px;
+}
