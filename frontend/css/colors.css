@@ -1,10 +1,17 @@
 .txt-blue {
   color: #7cc8e7;
 }
+.txt-bluer {
+  color: #0cace3;
+}
 .txt-black {
   color: #333;
 }
 
 .bg-blue {
   background-color: #7cc8e7;
+}
+
+.error-txt {
+  color: #e74e4e;
 }
