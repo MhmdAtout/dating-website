@@ -79,6 +79,7 @@ axios({
   const message_user_btn = document.querySelectorAll(".message_user_btn");
   message_user_btn.forEach((button) => {
     button.addEventListener("click", (e) => {
+      chat_list.innerHTML = "";
       e.preventDefault();
       notifications_page.classList.remove("flex");
       notifications_page.classList.add("hide");
@@ -95,9 +96,9 @@ axios({
         data: message_data,
       }).then((res) => {
         let messages = res.data.response;
-        const receiverName = users.find((user) => user.id == button.value).name;
+        const receiverName = users.find((user) => user.id == button.value);
         const receiver_name = document.getElementById("receiver_name");
-        receiver_name.innerText = receiverName;
+        receiver_name.innerText = receiverName.name;
         messages.forEach((message) => {
           console.log(message);
           if (message.sender_id == user_id) {
@@ -112,6 +113,23 @@ axios({
               <p>${message.content}</p>
             </div>`;
           }
+        });
+        const send_message_btn = document.getElementById("send_message_btn");
+        send_message_btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const message_data = new FormData();
+          const typed_message = document.getElementById("typed_message");
+          const receiver_id = receiverName.id;
+          message_data.append("sender_id", user_id);
+          message_data.append("recepient_id", receiver_id);
+          message_data.append("content", typed_message.value);
+          axios({
+            method: "post",
+            url: `${baseURL}/actions/sendMesaage`,
+            data: message_data,
+          }).then((res) => {
+            console.log(res.data);
+          });
         });
       });
     });
