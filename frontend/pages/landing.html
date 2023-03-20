@@ -26,54 +26,26 @@
         </div>
 
         <div class="navbar-content">
-          <a class="txt-bluer" href="">Home</a>
-          <a class="txt-bluer" href="">Safety</a>
-          <a class="txt-bluer" href="">Learn More</a>
-          <a class="txt-bluer" href="">Download</a>
-          <a class="txt-bluer" href="">Profile</a>
+          <a id="home_nav_btn" class="txt-bluer" href="">Home</a>
+          <a id="notification_nav_btn" class="txt-bluer" href=""
+            >Notifications</a
+          >
+          <a id="profile_nav_btn" class="txt-bluer" href="">Profile</a>
+          <a id="logout_nav_btn" class="txt-bluer" href="">Logout</a>
         </div>
       </div>
 
-      <div class="landing flex jc-se ai-center">
+      <div id="main_page" class="landing flex jc-se ai-center">
         <div class="users">
           <div class="users-title">
             <h1>Discover Users</h1>
           </div>
-          <div class="users-list flex jc-se ai-center">
-            <div class="user-card">
-              <div class="user-main-info flex column jc-center ai-center">
-                <div class="user-image">
-                  <img class="user-image" src="" alt="" />
-                </div>
-                <div class="user-name flex jc-center ai-center">
-                  <h3>Mohamad Atout</h3>
-                </div>
-              </div>
-              <div class="user-other-info flex column jc-center ai-center">
-                <div class="user-age">
-                  <p>21</p>
-                </div>
-                <div class="user-location">
-                  <p>Aramoun</p>
-                </div>
-              </div>
-              <div class="card-actions flex column jc-se ai-center">
-                <div class="message flex">
-                  <button>Message</button>
-                </div>
-                <div class="flex ai-center jc-center">
-                  <div class="follow">
-                    <button>Follow</button>
-                  </div>
-                  <div class="block">
-                    <button>Block</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div id="users_list" class="users-list flex jc-se ai-center"></div>
         </div>
-        <div class="notifications flex column jc-center ai-center">
+        <div
+          id="notifications_page"
+          class="notifications flex column jc-center ai-center"
+        >
           <div class="notification-title">
             <h1>Notifications</h1>
           </div>
@@ -86,7 +58,7 @@
             </div>
           </div>
         </div>
-        <div class="messages hide column">
+        <div id="message_page" class="messages hide column">
           <div class="notification-title flex jc-center">
             <h3>Mohamad Al Kayyali</h3>
           </div>
@@ -110,7 +82,7 @@
         </div>
       </div>
 
-      <div class="landing flex jc-se ai-center">
+      <div id="profile_page" class="landing hide jc-se ai-center">
         <div class="profile flex column jc-center ai-center">
           <div class="profile-img">
             <img class="profile-img" src="" alt="" />
@@ -166,6 +138,6 @@
     </div>
 
     <script src="../js/axios.min.js"></script>
-    <script src="../js/index.js"></script>
+    <script src="../js/home.js"></script>
   </body>
 </html>
