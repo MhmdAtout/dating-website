@@ -16,7 +16,7 @@ Route::group(["prefix"=>"auth"],function(){
 
 Route::group(["prefix"=>"user"],function(){
     Route::controller(UserController::class)->group(function () {
-        Route::get("/allUsers", "getUsers");
+        Route::get("/allUsers/{id}", "getUsers");
         Route::get("/{id}","getUser");
         Route::get("notification/{id}","notification");
         Route::post("/update","update");
