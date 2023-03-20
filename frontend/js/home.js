@@ -62,6 +62,36 @@ axios({
   `;
 });
 
+const my_following_list = document.getElementById("my_following_list");
+const my_followers_list = document.getElementById("my_followers_list");
+const my_blocks_list = document.getElementById("my_blocks_list");
+
+axios({
+  method: "post",
+  url: `${baseURL}/actions/following`,
+  data: {
+    follower_id: user_id,
+  },
+}).then((res) => {
+  let follow_data = res.data.response;
+  console.log(follow_data);
+  follow_data.forEach((data) => {
+    if (data.follower_id == user_id) {
+      my_following_list.innerHTML += `
+                <div class="other-card">
+                  <p>${data.followed.name}</p>
+                </div>
+        `;
+    } else {
+      my_followers_list.innerHTML += `
+                    <div class="other-card">
+                      <p>${data.follower.name}</p>
+                    </div>
+        `;
+    }
+  });
+});
+
 axios({
   method: "get",
   url: `${baseURL}/user/notification/${user_id}`,
