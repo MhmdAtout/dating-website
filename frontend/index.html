@@ -16,7 +16,7 @@
   </head>
   <body>
     <div class="wrapper">
-      <div class="auth flex jc-sb ai-center">
+      <div id="signup_page" class="auth flex jc-sb ai-center">
         <div class="auth-img">
           <img class="auth-bg" src="./assets/images/signup.jpg" alt="" />
         </div>
@@ -25,28 +25,36 @@
             <h1>Sign up</h1>
           </div>
           <div class="auth-content-inputs flex column jc-se ai-center">
-            <input type="text" placeholder="Full name" />
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <input type="text" placeholder="Age" />
-            <input type="text" placeholder="Gender" />
-            <input type="text" placeholder="Location" />
+            <input id="name_signup_input" type="text" placeholder="Full name" />
+            <input id="email_signup_input" type="text" placeholder="Email" />
+            <input
+              id="password_signup_input"
+              type="password"
+              placeholder="Password"
+            />
+            <input id="age_signup_input" type="text" placeholder="Age" />
+            <input id="gender_signup_input" type="text" placeholder="Gender" />
+            <input
+              id="location_signup_input"
+              type="text"
+              placeholder="Location"
+            />
           </div>
           <div class="auth-status">
-            <p class="error-txt">Email already in use</p>
+            <p class="error-txt"></p>
           </div>
           <div class="auth-btn">
-            <button>Register</button>
+            <button id="register">Register</button>
           </div>
           <div class="other">
             <p>
               Already have an accout ?
-              <span class="txt-blue pointer">Signin</span>
+              <span id="to_signin" class="txt-blue pointer">Signin</span>
             </p>
           </div>
         </div>
       </div>
-      <div class="auth flex jc-sb ai-center">
+      <div id="signin_page" class="auth hide jc-sb ai-center">
         <div class="auth-img">
           <img class="auth-bg" src="./assets/images/signup.jpg" alt="" />
         </div>
@@ -60,7 +68,7 @@
             <p class="frgt-pss txt-blue pointer">Forget password ?</p>
           </div>
           <div class="auth-status">
-            <p class="error-txt">Credentials are incorrect</p>
+            <p class="error-txt"></p>
           </div>
           <div class="auth-btn">
             <button>Login</button>
@@ -68,7 +76,7 @@
           <div class="other">
             <p>
               Don't have an accout ?
-              <span class="txt-blue pointer">Signup</span>
+              <span id="to_signup" class="txt-blue pointer">Signup</span>
             </p>
           </div>
         </div>
