@@ -182,4 +182,23 @@ axios({
       });
     });
   });
+
+  // fetching block API
+  const block_user_btn = document.querySelectorAll(".block_user_btn");
+  block_user_btn.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      let block_data = new FormData();
+      block_data.append("blocker_id", user_id);
+      block_data.append("blocked_id", button.value);
+
+      axios({
+        method: "post",
+        url: `${baseURL}/actions/block`,
+        data: block_data,
+      }).then((res) => {
+        console.log(res.data);
+      });
+    });
+  });
 });
