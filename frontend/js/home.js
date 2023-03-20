@@ -94,16 +94,17 @@ axios({
                 </div>
                 <div class="flex ai-center jc-center">
                   <div class="follow">
-                    <button value="${user.id}">Follow</button>
+                    <button class="follow_user_btn" value="${user.id}">Follow</button>
                   </div>
                   <div class="block">
-                    <button value="${user.id}">Block</button>
+                    <button class="block_user_btn" value="${user.id}">Block</button>
                   </div>
                 </div>
               </div>
     </div>
     `;
   });
+
   const message_user_btn = document.querySelectorAll(".message_user_btn");
   message_user_btn.forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -159,6 +160,25 @@ axios({
             console.log(res.data);
           });
         });
+      });
+    });
+  });
+
+  // fetching follow API
+  const follow_user_btn = document.querySelectorAll(".follow_user_btn");
+  follow_user_btn.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      let follow_data = new FormData();
+      follow_data.append("follower_id", user_id);
+      follow_data.append("followed_id", button.value);
+
+      axios({
+        method: "post",
+        url: `${baseURL}/actions/follow`,
+        data: follow_data,
+      }).then((res) => {
+        console.log(res.data);
       });
     });
   });
