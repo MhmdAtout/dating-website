@@ -93,6 +93,23 @@ axios({
 });
 
 axios({
+  method: "post",
+  url: `${baseURL}/actions/blocks`,
+  data: {
+    blocker_id: user_id,
+  },
+}).then((res) => {
+  let block_data = res.data.response;
+  block_data.forEach((data) => {
+    my_blocks_list.innerHTML += `
+            <div class="other-card">
+                <p>${data.blocked.name}</p>
+              </div>
+    `;
+  });
+});
+
+axios({
   method: "get",
   url: `${baseURL}/user/notification/${user_id}`,
 }).then((res) => {
