@@ -8,6 +8,8 @@ const notifications_page = document.getElementById("notifications_page");
 const message_page = document.getElementById("message_page");
 const profile_page = document.getElementById("profile_page");
 
+const chat_list = document.getElementById("chat_list");
+
 const user_id = localStorage.getItem("id");
 const baseURL = "http://localhost:8002/api";
 
@@ -73,5 +75,45 @@ axios({
               </div>
     </div>
     `;
+  });
+  const message_user_btn = document.querySelectorAll(".message_user_btn");
+  message_user_btn.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      notifications_page.classList.remove("flex");
+      notifications_page.classList.add("hide");
+      message_page.classList.remove("hide");
+      message_page.classList.add("flex");
+
+      let message_data = new FormData();
+      message_data.append("sender_id", button.value);
+      message_data.append("recepient_id", user_id);
+
+      axios({
+        method: "post",
+        url: `${baseURL}/actions/getMesaage`,
+        data: message_data,
+      }).then((res) => {
+        let messages = res.data.response;
+        const receiverName = users.find((user) => user.id == button.value).name;
+        const receiver_name = document.getElementById("receiver_name");
+        receiver_name.innerText = receiverName;
+        messages.forEach((message) => {
+          console.log(message);
+          if (message.sender_id == user_id) {
+            chat_list.innerHTML += `
+            <div class="sent-message">
+              <p>${message.content}</p>
+            </div>
+            `;
+          } else {
+            chat_list.innerHTML += `
+            <div class="received-message">
+              <p>${message.content}</p>
+            </div>`;
+          }
+        });
+      });
+    });
   });
 });
