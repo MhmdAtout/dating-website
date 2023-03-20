@@ -64,55 +64,30 @@
       </div>
 
       <div id="profile_page" class="landing hide jc-se ai-center">
-        <div class="profile flex column jc-center ai-center">
-          <div class="profile-img">
-            <img class="profile-img" src="" alt="" />
-          </div>
-          <div class="username">
-            <h1>Mohamad Atout</h1>
-          </div>
-          <div class="user-info flex column">
-            <p>22 yo</p>
-            <p>Aramoun</p>
-            <p class="">mohamad.atout0@gmail.com</p>
-            <p class="">bkelme men kelmete b5alle emmek 7amete</p>
-            <input class="location hide" type="text" placeholder="location" />
-            <input class="bio hide" type="text" placeholder="bio" />
-          </div>
-          <button>Edit</button>
-        </div>
+        <div
+          id="display_profile"
+          class="profile flex column jc-center ai-center"
+        ></div>
         <div class="profile-others flex jc-center ai-center">
           <div class="follows flex column jc-center ai-center">
             <div class="following flex column jc-start ai-center">
               <div class="other-title">
                 <h3>Following</h3>
               </div>
-              <div class="other-list">
-                <div class="other-card">
-                  <p>Mhmd Atout</p>
-                </div>
-              </div>
+              <div id="my_following_list" class="other-list"></div>
             </div>
             <div class="follower flex column jc-start ai-center">
               <div class="other-title">
                 <h3>Followers</h3>
               </div>
-              <div class="other-list">
-                <div class="other-card">
-                  <p>Mhmd Atout</p>
-                </div>
-              </div>
+              <div id="my_followers_list" class="other-list"></div>
             </div>
           </div>
           <div class="blocks flex column jc-start ai-center">
             <div class="other-title">
               <h3>Blocks</h3>
             </div>
-            <div class="other-list">
-              <div class="other-card">
-                <p>Mhmd Atout</p>
-              </div>
-            </div>
+            <div id="my_blocks_list" class="other-list"></div>
           </div>
         </div>
       </div>
