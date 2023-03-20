@@ -12,7 +12,7 @@ const chat_list = document.getElementById("chat_list");
 const notification_section = document.getElementById("notification_section");
 
 const user_id = localStorage.getItem("id");
-const baseURL = "http://localhost:8002/api";
+const baseURL = "http://localhost:8003/api";
 
 home_nav_btn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -108,8 +108,8 @@ axios({
   const message_user_btn = document.querySelectorAll(".message_user_btn");
   message_user_btn.forEach((button) => {
     button.addEventListener("click", (e) => {
-      chat_list.innerHTML = "";
       e.preventDefault();
+      chat_list.innerHTML = "";
       notifications_page.classList.remove("flex");
       notifications_page.classList.add("hide");
       message_page.classList.remove("hide");
