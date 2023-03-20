@@ -9,6 +9,7 @@ const message_page = document.getElementById("message_page");
 const profile_page = document.getElementById("profile_page");
 
 const chat_list = document.getElementById("chat_list");
+const notification_section = document.getElementById("notification_section");
 
 const user_id = localStorage.getItem("id");
 const baseURL = "http://localhost:8002/api";
@@ -33,6 +34,33 @@ notification_nav_btn.addEventListener("click", (e) => {
   message_page.classList.add("hide");
   notifications_page.classList.remove("hide");
   notifications_page.classList.add("flex");
+});
+
+axios({
+  method: "get",
+  url: `${baseURL}/user/notification/${user_id}`,
+}).then((res) => {
+  let follow_notf = res.data.follows;
+  let block_notf = res.data.blocks;
+  follow_notf.forEach((follow) => {
+    notification_section.innerHTML += `
+        <div class="notifocation-card">   
+            <p>
+                <span class="txt-blue bold">${follow.follower.name}</span> started
+                following you.
+              </p>
+        </div>
+    `;
+  });
+  block_notf.forEach((block) => {
+    notification_section.innerHTML += `
+        <div class="notifocation-card">   
+            <p>
+                <span class="txt-blue bold">${block.blocker.name}</span> blocked you.
+              </p>
+        </div>
+    `;
+  });
 });
 
 const users_list = document.getElementById("users_list");
