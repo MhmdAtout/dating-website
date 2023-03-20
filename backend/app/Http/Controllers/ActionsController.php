@@ -62,7 +62,8 @@ class ActionsController extends Controller
 
     function getFollowing(Request $request){
         $following = Follower::where("follower_id", $request->follower_id)
-                                ->with("followed")
+                                ->orWhere("followed_id", $request->follower_id)
+                                ->with("followed", "follower")
                                 ->get();
 
         if($following->count()!=0){
