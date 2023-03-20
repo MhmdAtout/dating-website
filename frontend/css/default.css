@@ -110,6 +110,10 @@ button {
   cursor: pointer;
   margin: 5px;
 }
+button:active {
+  transform: scale(0.5);
+  transition: 0.5s;
+}
 
 /* ankertags */
 a {
