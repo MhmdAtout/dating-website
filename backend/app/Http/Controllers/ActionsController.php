@@ -24,9 +24,9 @@ class ActionsController extends Controller
 
     function getMessage(Request $request){
         $message = Message::where("sender_id", $request->sender_id)
-                            ->orWhere("recepient_id", $request->recepient_id)
+                            ->where("recepient_id", $request->recepient_id)
                             ->orWhere("sender_id", $request->recepient_id)
-                            ->orWhere("recepient_id", $request->sender_id)
+                            ->where("recepient_id", $request->sender_id)
                             ->with("sender", "recepient")
                             ->get();
 
