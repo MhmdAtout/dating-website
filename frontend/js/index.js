@@ -42,11 +42,16 @@ register_btn.addEventListener("click", () => {
     method: "post",
     url: `${baseURL}/auth/register`,
     data: register_data,
-  }).then((res) => {
-    console.log(res.data);
-    localStorage.setItem("id", res.data.user.id);
-    window.location.href = "./pages/landing.html";
-  });
+  })
+    .then((res) => {
+      console.log(res.data);
+      localStorage.setItem("id", res.data.user.id);
+      window.location.href = "./pages/landing.html";
+    })
+    .catch((error) => {
+      console.log(error);
+      signup_error.innerHTML = error.response.data.message;
+    });
 });
 
 const email_signin_input = document.getElementById("email_signin_input");
