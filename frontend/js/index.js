@@ -3,6 +3,8 @@ const signin_page = document.getElementById("signin_page");
 const to_signin = document.getElementById("to_signin");
 const to_signup = document.getElementById("to_signup");
 
+const baseURL = "http://localhost:8003/api";
+
 // Navigiating between signup and signin
 to_signin.addEventListener("click", () => {
   signin_page.classList.remove("hide");
@@ -38,7 +40,7 @@ register_btn.addEventListener("click", () => {
 
   axios({
     method: "post",
-    url: "http://localhost:8002/api/auth/register",
+    url: `${baseURL}/auth/register`,
     data: register_data,
   }).then((res) => {
     console.log(res.data);
@@ -59,7 +61,7 @@ login_btn.addEventListener("click", () => {
 
   axios({
     method: "post",
-    url: "http://localhost:8002/api/auth/login",
+    url: `${baseURL}/auth/login`,
     data: login_data,
   })
     .then((res) => {
