@@ -11,6 +11,8 @@ const profile_page = document.getElementById("profile_page");
 const chat_list = document.getElementById("chat_list");
 const notification_section = document.getElementById("notification_section");
 
+const display_profile = document.getElementById("display_profile");
+
 const user_id = localStorage.getItem("id");
 const baseURL = "http://localhost:8003/api";
 
@@ -34,6 +36,30 @@ notification_nav_btn.addEventListener("click", (e) => {
   message_page.classList.add("hide");
   notifications_page.classList.remove("hide");
   notifications_page.classList.add("flex");
+});
+
+axios({
+  method: "get",
+  url: `${baseURL}/user/${user_id}`,
+}).then((res) => {
+  let me = res.data.user;
+  display_profile.innerHTML = `
+        <div class="profile-img">
+            <img class="profile-img" src="" alt="" />
+          </div>
+          <div class="username">
+            <h1>${me.name}</h1>
+          </div>
+          <div class="user-info flex column">
+            <p>${me.age} yo</p>
+            <p>${me.location}</p>
+            <p class="">${me.email}</p>
+            <p class="">${me.bio}</p>
+            <input class="location hide" type="text" placeholder="location" />
+            <input class="bio hide" type="text" placeholder="bio" />
+          </div>
+          <button>Edit</button>
+  `;
 });
 
 axios({
