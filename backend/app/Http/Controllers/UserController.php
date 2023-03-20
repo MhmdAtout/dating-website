@@ -10,8 +10,10 @@ use App\Models\Info;
 
 class UserController extends Controller
 {
-    function getUsers(){
-        $users = User::all();
+    function getUsers($id){
+        $user = User::find($id);
+        $users = User::where("gender", "!=", "$user[gender]")
+                        ->get();
 
         return response()->json([
             "users" => $users
