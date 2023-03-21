@@ -1,9 +1,11 @@
 const home_nav_btn = document.getElementById("home_nav_btn");
+const search_input = document.getElementById("search_input");
 const notification_nav_btn = document.getElementById("notification_nav_btn");
 const profile_nav_btn = document.getElementById("profile_nav_btn");
 const logout_nav_btn = document.getElementById("logout_nav_btn");
 
 const main_page = document.getElementById("main_page");
+const filter_age = document.getElementById("filter_age");
 const notifications_page = document.getElementById("notifications_page");
 const message_page = document.getElementById("message_page");
 const profile_page = document.getElementById("profile_page");
@@ -12,6 +14,11 @@ const chat_list = document.getElementById("chat_list");
 const notification_section = document.getElementById("notification_section");
 
 const display_profile = document.getElementById("display_profile");
+
+const reader = new FileReader();
+let encoded;
+
+let users = [];
 
 const user_id = localStorage.getItem("id");
 const baseURL = "http://localhost:8003/api";
@@ -31,6 +38,49 @@ profile_nav_btn.addEventListener("click", (e) => {
   main_page.classList.remove("flex");
   main_page.classList.add("hide");
   notification_nav_btn.classList.add("hide");
+
+  axios({
+    method: "post",
+    url: `${baseURL}/actions/following`,
+    data: {
+      follower_id: user_id,
+    },
+  }).then((res) => {
+    let follow_data = res.data.response;
+    console.log(follow_data);
+    follow_data.forEach((data) => {
+      if (data.follower_id == user_id) {
+        my_following_list.innerHTML += `
+                  <div class="other-card">
+                    <p>${data.followed.name}</p>
+                  </div>
+          `;
+      } else {
+        my_followers_list.innerHTML += `
+                      <div class="other-card">
+                        <p>${data.follower.name}</p>
+                      </div>
+          `;
+      }
+    });
+  });
+
+  axios({
+    method: "post",
+    url: `${baseURL}/actions/blocks`,
+    data: {
+      blocker_id: user_id,
+    },
+  }).then((res) => {
+    let block_data = res.data.response;
+    block_data.forEach((data) => {
+      my_blocks_list.innerHTML += `
+              <div class="other-card">
+                  <p>${data.blocked.name}</p>
+                </div>
+      `;
+    });
+  });
 });
 notification_nav_btn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -51,8 +101,12 @@ axios({
 }).then((res) => {
   let me = res.data.user;
   display_profile.innerHTML = `
-        <div class="profile-img">
-            <img class="profile-img" src="" alt="" />
+        <div class="profile-img flex column jc-sa ai-center">
+            <img id="my_profile_pic" class="profile-img" src="http://localhost:8003/profiles/${user_id}.png" alt="" />
+            <div class="change-img-input flex jc-center ai-center">
+                <label for="profile-pic" id="image_input" class="change-photo bold txt-blue">Choose Picture</label>
+                <input name="profile-pic" class="img-input" type="file">
+            </div>
           </div>
           <div class="username">
             <h1>${me.name}</h1>
@@ -65,7 +119,10 @@ axios({
             <input id="edit_bio_input" class="bio hide" type="text" placeholder="bio" />
             <p class="">${me.email}</p>
           </div>
-          <button id="edit_user">Edit</button>
+          <div class="flex jc-sb ai-center">
+            <button id="edit_user">Edit</button>
+            <button id="upload_img_btn">Upload Image</button>
+          </div>
   `;
   const edit_user = document.getElementById("edit_user");
   const edit_bio_input = document.getElementById("edit_bio_input");
@@ -115,54 +172,44 @@ axios({
       });
     }
   });
+
+  const image_input = document.getElementById("image_input");
+  const upload_img_btn = document.getElementById("upload_img_btn");
+
+  image_input.addEventListener("change", (e) => {
+    let file = image_input.files[0];
+    console.log(file);
+    reader.readAsDataURL(file);
+
+    reader.addEventListener("load", () => {
+      encoded = reader.result;
+    });
+  });
+
+  upload_img_btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let image_data = new FormData();
+    image_data.append("id", user_id);
+    image_data.append("encoded", encoded.split(",")[1]);
+    axios({
+      method: "post",
+      url: `${baseURL}/actions/uploadImg`,
+      data: image_data,
+    }).then((res) => {
+      if (res.data.status == "success") {
+        const my_profile_pic = document.getElementById("my_profile_pic");
+        my_profile_pic.setAttribute(
+          "src",
+          `http://localhost:8003/profiles/${user_id}.png`
+        );
+      }
+    });
+  });
 });
 
 const my_following_list = document.getElementById("my_following_list");
 const my_followers_list = document.getElementById("my_followers_list");
 const my_blocks_list = document.getElementById("my_blocks_list");
-
-axios({
-  method: "post",
-  url: `${baseURL}/actions/following`,
-  data: {
-    follower_id: user_id,
-  },
-}).then((res) => {
-  let follow_data = res.data.response;
-  console.log(follow_data);
-  follow_data.forEach((data) => {
-    if (data.follower_id == user_id) {
-      my_following_list.innerHTML += `
-                <div class="other-card">
-                  <p>${data.followed.name}</p>
-                </div>
-        `;
-    } else {
-      my_followers_list.innerHTML += `
-                    <div class="other-card">
-                      <p>${data.follower.name}</p>
-                    </div>
-        `;
-    }
-  });
-});
-
-axios({
-  method: "post",
-  url: `${baseURL}/actions/blocks`,
-  data: {
-    blocker_id: user_id,
-  },
-}).then((res) => {
-  let block_data = res.data.response;
-  block_data.forEach((data) => {
-    my_blocks_list.innerHTML += `
-            <div class="other-card">
-                <p>${data.blocked.name}</p>
-              </div>
-    `;
-  });
-});
 
 axios({
   method: "get",
@@ -196,45 +243,8 @@ axios({
   method: "get",
   url: `${baseURL}/user/allUsers/${user_id}`,
 }).then((res) => {
-  let users = res.data.users;
-  users.forEach((user) => {
-    users_list.innerHTML += `
-    <div class="user-card">
-              <div class="user-main-info flex column jc-center ai-center">
-                <div class="user-image">
-                  <img class="user-image" src="" alt="" />
-                </div>
-                <div class="user-name flex jc-center ai-center">
-                  <h3>${user.name}</h3>
-                </div>
-              </div>
-              <div class="user-other-info flex column jc-center ai-center">
-                <div class="user-age">
-                  <p>${user.age}</p>
-                </div>
-                <div class="user-location">
-                  <p>${user.location}</p>
-                </div>
-                <div class="user-bio">
-                  <p>${user.bio}</p>
-                </div>
-              </div>
-              <div class="card-actions flex column jc-se ai-center">
-                <div class="message flex">
-                  <button class="message_user_btn" value="${user.id}">Message</button>
-                </div>
-                <div class="flex ai-center jc-center">
-                  <div class="follow">
-                    <button class="follow_user_btn" value="${user.id}">Follow</button>
-                  </div>
-                  <div class="block">
-                    <button class="block_user_btn" value="${user.id}">Block</button>
-                  </div>
-                </div>
-              </div>
-    </div>
-    `;
-  });
+  users = res.data.users;
+  displayUsers(users, users_list);
 
   const message_user_btn = document.querySelectorAll(".message_user_btn");
   message_user_btn.forEach((button) => {
@@ -333,3 +343,45 @@ axios({
     });
   });
 });
+
+function displayUsers(users, container) {
+  container.innerHTML = "";
+  users.forEach((user) => {
+    container.innerHTML += `
+        <div class="user-card">
+                  <div class="user-main-info flex column jc-center ai-center">
+                    <div class="user-image">
+                      <img class="user-image" src="" alt="" />
+                    </div>
+                    <div class="user-name flex jc-center ai-center">
+                      <h3>${user.name}</h3>
+                    </div>
+                  </div>
+                  <div class="user-other-info flex column jc-center ai-center">
+                    <div class="user-age">
+                      <p>${user.age}</p>
+                    </div>
+                    <div class="user-location">
+                      <p>${user.location}</p>
+                    </div>
+                    <div class="user-bio">
+                      <p>${user.bio}</p>
+                    </div>
+                  </div>
+                  <div class="card-actions flex column jc-se ai-center">
+                    <div class="message flex">
+                      <button class="message_user_btn" value="${user.id}">Message</button>
+                    </div>
+                    <div class="flex ai-center jc-center">
+                      <div class="follow">
+                        <button class="follow_user_btn" value="${user.id}">Follow</button>
+                      </div>
+                      <div class="block">
+                        <button class="block_user_btn" value="${user.id}">Block</button>
+                      </div>
+                    </div>
+                  </div>
+        </div>
+        `;
+  });
+}
