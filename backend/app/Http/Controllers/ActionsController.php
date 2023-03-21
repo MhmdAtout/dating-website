@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\Follower;
 use App\Models\Block;
+use App\Models\UserInfo;
 
 class ActionsController extends Controller
 {
@@ -120,5 +121,24 @@ class ActionsController extends Controller
                 "response" => "No Blocks"
             ]);
         }
+    }
+
+    function uploadImg(Request $request){
+        $encoded = $request->encoded;
+        $id = $request->id;
+
+        $decoded = base64_decode($encoded);
+
+        $path = public_path('profiles/'. $id . '.png');
+        file_put_contents($path,$decoded);
+
+        UserInfo::create([
+            "user_id" => $id,
+            "profile_pic" => $path
+        ]);
+
+        return response()->json([
+            "status" => "success"
+        ]);
     }
 }
