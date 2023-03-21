@@ -113,6 +113,11 @@
   height: 100%;
   text-align: center;
 }
+.user-other-info {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
 
 .notifications {
   width: 25vw;
