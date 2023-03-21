@@ -397,3 +397,24 @@ search_input.addEventListener("change", (e) => {
 
   displayUsers(filtered_users, users_list);
 });
+
+filter_age.addEventListener("change", (e) => {
+  const value = e.target.value;
+  console.log(value);
+  let filtered_users;
+  if (value === "above18") {
+    filtered_users = users.filter((user) => {
+      return parseInt(user.age) > 18 && parseInt(user.age) < 25;
+    });
+  } else if (value === "above25") {
+    filtered_users = users.filter((user) => {
+      return parseInt(user.age) > 25 && parseInt(user.age) < 30;
+    });
+  } else if (value === "above30") {
+    filtered_users = users.filter((user) => {
+      return parseInt(user.age) > 30;
+    });
+  }
+
+  displayUsers(filtered_users, users_list);
+});
