@@ -68,7 +68,18 @@
   height: 90vh;
   padding: 40px;
 }
-
+.change-img-input {
+  position: relative;
+}
+.img-input {
+  opacity: 0;
+  position: absolute;
+}
+.change-photo {
+  position: absolute;
+  width: 200px;
+  text-align: center;
+}
 .users {
   width: 65vw;
   height: 100%;
@@ -114,7 +125,7 @@
   text-align: center;
 }
 .user-other-info {
-  width: 50%;
+  width: 70%;
   margin: auto;
   text-align: center;
 }
