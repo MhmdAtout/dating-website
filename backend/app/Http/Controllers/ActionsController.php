@@ -96,9 +96,11 @@ class ActionsController extends Controller
                 "blocked_id" => $request->blocked_id,
             ]);
 
-            $remove_follow = Follower::where("follower_id", $request->blocker_id)
-                                    ->where("followed_id", $request->blocked_id)
-                                    ->delete();
+            Follower::where("follower_id", $request->blocker_id)
+                    ->where("followed_id", $request->blocked_id)
+                    ->orWhere("follower_id", $request->blocked_id)
+                    ->where("followed_id", $request->blocker_id)
+                    ->delete();
     
             return response()->json([
                 "message" => $block,
