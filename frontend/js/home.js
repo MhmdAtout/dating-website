@@ -385,3 +385,15 @@ function displayUsers(users, container) {
         `;
   });
 }
+
+search_input.addEventListener("change", (e) => {
+  const value = e.target.value.toLowerCase();
+
+  const filtered_users = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(value) ||
+      user.location.toLowerCase().includes(value)
+  );
+
+  displayUsers(filtered_users, users_list);
+});
