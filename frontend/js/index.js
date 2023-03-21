@@ -37,6 +37,7 @@ register_btn.addEventListener("click", () => {
   register_data.append("age", age_signup_input.value);
   register_data.append("gender", gender_signup_input.value);
   register_data.append("location", location_signup_input.value);
+  register_data.append("bio", "");
 
   axios({
     method: "post",
