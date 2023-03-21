@@ -59,14 +59,62 @@ axios({
           </div>
           <div class="user-info flex column jc-center ai-center">
             <p>${me.age} yo</p>
-            <p>${me.location}</p>
+            <p id="user_location" class="">${me.location}</p>
+            <p id="user_bio" class="">${me.bio}</p>
+            <input id="edit_location_input" class="location hide" type="text" placeholder="location" />
+            <input id="edit_bio_input" class="bio hide" type="text" placeholder="bio" />
             <p class="">${me.email}</p>
-            <p class="">${me.bio}</p>
-            <input class="location hide" type="text" placeholder="location" />
-            <input class="bio hide" type="text" placeholder="bio" />
           </div>
-          <button>Edit</button>
+          <button id="edit_user">Edit</button>
   `;
+  const edit_user = document.getElementById("edit_user");
+  const edit_bio_input = document.getElementById("edit_bio_input");
+  const edit_location_input = document.getElementById("edit_location_input");
+  const user_location = document.getElementById("user_location");
+  const user_bio = document.getElementById("user_bio");
+  edit_user.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log(edit_user.innerText);
+    if (edit_user.innerText == "Edit") {
+      user_location.classList.add("hide");
+      user_bio.classList.add("hide");
+      edit_location_input.classList.remove("hide");
+      edit_bio_input.classList.remove("hide");
+      edit_user.innerText = "Save";
+    } else {
+      user_location.classList.remove("hide");
+      user_bio.classList.remove("hide");
+      edit_location_input.classList.add("hide");
+      edit_bio_input.classList.add("hide");
+      edit_user.innerText = "Edit";
+
+      let updata_data = new FormData();
+      let new_location_value;
+      let new_bio_value;
+
+      if (edit_location_input.value === "") {
+        new_location_value = user_location.innerText;
+      } else {
+        new_location_value = edit_location_input.value;
+      }
+      if (edit_bio_input.value === "") {
+        new_bio_value = user_bio.innerText;
+      } else {
+        new_bio_value = edit_bio_input.value;
+      }
+      console.log(new_location_value);
+      console.log(new_bio_value);
+      updata_data.append("id", user_id);
+      updata_data.append("location", new_location_value);
+      updata_data.append("bio", new_bio_value);
+
+      axios({
+        method: "post",
+        url: `${baseURL}/user/update`,
+        data: updata_data,
+      });
+    }
+  });
 });
 
 const my_following_list = document.getElementById("my_following_list");
