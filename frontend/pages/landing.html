@@ -22,7 +22,11 @@
         </div>
 
         <div class="navbar-search">
-          <input type="text" placeholder="Search" />
+          <input
+            id="search_input"
+            type="text"
+            placeholder="Search location or name"
+          />
         </div>
 
         <div class="navbar-content">
@@ -37,8 +41,17 @@
 
       <div id="main_page" class="landing flex jc-se ai-center">
         <div class="users">
-          <div class="users-title">
+          <div class="users-title flex jc-sb ai-center">
             <h1>Discover Users</h1>
+            <div>
+              <label class="regular" for="select">Filter by age</label>
+              <select name="select" id="filter_age">
+                <option value=""></option>
+                <option value="above18">18 - 25</option>
+                <option value="above25">25 - 30</option>
+                <option value="above30">30 +</option>
+              </select>
+            </div>
           </div>
           <div id="users_list" class="users-list flex jc-se ai-center"></div>
         </div>
