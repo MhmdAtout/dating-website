@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('users_info', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('id')->on('users');
-            $table->string('prodile_pic');
-            $table->string('optional_pic1');
-            $table->string('optional_pic2');
-            $table->string('optional_pic3');
+            $table->string('profile_pic')->nullable();
+            $table->string('optional_pic1')->nullable();
+            $table->string('optional_pic2')->nullable();
+            $table->string('optional_pic3')->nullable();
             $table->timestamps();
         });
     }
