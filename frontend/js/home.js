@@ -22,6 +22,7 @@ home_nav_btn.addEventListener("click", (e) => {
   main_page.classList.add("flex");
   profile_page.classList.remove("flex");
   profile_page.classList.add("hide");
+  notification_nav_btn.classList.remove("hide");
 });
 profile_nav_btn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -29,6 +30,7 @@ profile_nav_btn.addEventListener("click", (e) => {
   profile_page.classList.add("flex");
   main_page.classList.remove("flex");
   main_page.classList.add("hide");
+  notification_nav_btn.classList.add("hide");
 });
 notification_nav_btn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -36,6 +38,11 @@ notification_nav_btn.addEventListener("click", (e) => {
   message_page.classList.add("hide");
   notifications_page.classList.remove("hide");
   notifications_page.classList.add("flex");
+});
+logout_nav_btn.addEventListener("click", (e) => {
+  e.preventDefault();
+  localStorage.clear();
+  window.location.href = "../index.html";
 });
 
 axios({
@@ -50,7 +57,7 @@ axios({
           <div class="username">
             <h1>${me.name}</h1>
           </div>
-          <div class="user-info flex column">
+          <div class="user-info flex column jc-center ai-center">
             <p>${me.age} yo</p>
             <p>${me.location}</p>
             <p class="">${me.email}</p>
@@ -159,6 +166,9 @@ axios({
                 </div>
                 <div class="user-location">
                   <p>${user.location}</p>
+                </div>
+                <div class="user-bio">
+                  <p>${user.bio}</p>
                 </div>
               </div>
               <div class="card-actions flex column jc-se ai-center">
