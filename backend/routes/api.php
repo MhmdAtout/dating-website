@@ -31,6 +31,7 @@ Route::group(["prefix"=>"actions"],function(){
         Route::post("/following", "getFollowing");
         Route::post("/block", "block");
         Route::post("/blocks", "getBlocks");
+        Route::post("/uploadImg", "uploadImg");
     });
 });
 
