@@ -11,3 +11,7 @@
 - Filter users by age
 - Upload a profile image (Base64)
 - Edit their profile info
+
+### Project's ER Diagram
+
+  <img src="./frontend/assets/images/erdiagram.png">
